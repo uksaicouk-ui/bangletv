@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Radio, Search, ShieldCheck, Globe, Menu, X, ExternalLink } from 'lucide-react';
+import { Radio, Search, ShieldCheck, Globe, Menu, X, ExternalLink, Sparkles, MessageSquare, Server } from 'lucide-react';
 import { Channel } from '../types';
+import { BengalTVWatermark } from './BengalTVWatermark';
 
 interface HeaderProps {
   currentTab: string;
@@ -9,6 +10,7 @@ interface HeaderProps {
   onOpenSearch: () => void;
   onOpenContact: () => void;
   onOpenOwnership: () => void;
+  onOpenFeedback?: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -17,17 +19,19 @@ export const Header: React.FC<HeaderProps> = ({
   activeChannel,
   onOpenSearch,
   onOpenContact,
-  onOpenOwnership
+  onOpenOwnership,
+  onOpenFeedback,
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks = [
-    { id: 'player', label: 'Live Broadcast' },
+    { id: 'player', label: 'Live TV' },
+    { id: 'vod', label: 'VOD & Catch-up' },
     { id: 'schedule', label: 'Schedule' },
-    { id: 'documentary', label: 'Bangladesh Archive' },
+    { id: 'regions', label: 'Regions' },
     { id: 'federation', label: 'Federation Nodes' },
-    { id: 'architecture', label: 'Open Ecosystem' },
-    { id: 'policies', label: 'Policies' },
+    { id: 'admin', label: 'Admin Ops' },
+    { id: 'policies', label: 'Charters' },
   ];
 
   const handleNavClick = (tabId: string) => {
@@ -41,19 +45,20 @@ export const Header: React.FC<HeaderProps> = ({
         {/* Top Bar Contract: 3 zones */}
         <div className="flex items-center justify-between h-18">
           
-          {/* Zone 1: Single text element wordmark */}
+          {/* Zone 1: Wordmark with User's Bengal TV Logo */}
           <div className="flex items-center gap-3">
             <button 
               onClick={() => handleNavClick('player')}
-              className="text-left group cursor-pointer focus:outline-none"
+              className="text-left group cursor-pointer focus:outline-none flex items-center gap-2.5"
               aria-label="BangleTV Home"
             >
+              <BengalTVWatermark size="sm" showText={false} />
               <div className="flex items-baseline gap-2">
                 <span className="font-brand text-2xl font-bold tracking-tight text-white group-hover:text-emerald-400 transition-colors">
                   BangleTV<span className="text-emerald-500">.com</span>
                 </span>
-                <span className="hidden sm:inline-block text-[11px] text-slate-400 font-mono uppercase tracking-wider">
-                  Open IPTV
+                <span className="hidden sm:inline-block text-[11px] text-amber-400 font-serif font-bold tracking-wider">
+                  বেঙ্গল টিভি
                 </span>
               </div>
             </button>
@@ -104,13 +109,17 @@ export const Header: React.FC<HeaderProps> = ({
               <span>Governance</span>
             </button>
 
-            {/* Primary Action Button */}
-            <button
-              onClick={onOpenContact}
-              className="px-3.5 py-1.5 text-xs font-semibold text-slate-950 bg-emerald-400 hover:bg-emerald-300 rounded transition-colors whitespace-nowrap cursor-pointer shadow-sm shadow-emerald-500/10"
-            >
-              Node Inquiries
-            </button>
+            {/* Propose Programme / Channel Suggestion */}
+            {onOpenFeedback && (
+              <button
+                onClick={onOpenFeedback}
+                className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-slate-950 bg-emerald-400 hover:bg-emerald-300 rounded transition-colors whitespace-nowrap cursor-pointer shadow-sm shadow-emerald-500/10"
+                title="Submit Programme Ideas, Channel Suggestions, or Information"
+              >
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>Propose / Feedback</span>
+              </button>
+            )}
 
             {/* Mobile Hamburger */}
             <button
@@ -158,15 +167,18 @@ export const Header: React.FC<HeaderProps> = ({
               <span className="text-[11px] text-slate-400">USA / BD</span>
             </button>
             
-            <button
-              onClick={() => {
-                onOpenContact();
-                setMobileMenuOpen(false);
-              }}
-              className="w-full py-2 text-xs font-semibold text-center text-slate-950 bg-emerald-400 rounded"
-            >
-              Node Intake & Legal Notices
-            </button>
+            {onOpenFeedback && (
+              <button
+                onClick={() => {
+                  onOpenFeedback();
+                  setMobileMenuOpen(false);
+                }}
+                className="w-full py-2 text-xs font-semibold text-center text-slate-950 bg-emerald-400 rounded flex items-center justify-center gap-1.5"
+              >
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>Submit Programme Idea or Tip</span>
+              </button>
+            )}
           </div>
         </div>
       )}

@@ -8,32 +8,79 @@ import { Header } from './components/Header';
 import { Player } from './components/Player';
 import { ChannelGrid } from './components/ChannelGrid';
 import { BroadcastSchedule } from './components/BroadcastSchedule';
+import { VODSection } from './components/VODSection';
+import { RegionDirectory } from './components/RegionDirectory';
 import { BangladeshDocumentarySection } from './components/BangladeshDocumentarySection';
 import { FederationSection } from './components/FederationSection';
 import { OpenSourceArchitecture } from './components/OpenSourceArchitecture';
 import { PoliciesView } from './components/PoliciesView';
 import { OwnershipModal } from './components/OwnershipModal';
 import { ContactModal } from './components/ContactModal';
+import { ViewerFeedbackModal } from './components/ViewerFeedbackModal';
 import { SearchModal } from './components/SearchModal';
+import { AdminDashboard } from './components/AdminDashboard';
+import { ChannelInfoModal } from './components/ChannelInfoModal';
 import { Footer } from './components/Footer';
 import { CHANNELS } from './data/channelsData';
 import { Channel, DocumentaryReference } from './types';
-import { Radio, ShieldCheck, Film, Globe, Sparkles, ArrowRight, Play, Server, Layers, Cpu, Network } from 'lucide-react';
+import { Radio, ShieldCheck, Film, Globe, Sparkles, ArrowRight, Play, Server, Layers, Cpu, Network, Bookmark, History } from 'lucide-react';
 
 export default function App() {
   const [currentTab, setCurrentTab] = useState<string>('player');
   const [selectedPolicyTab, setSelectedPolicyTab] = useState<string>('copyright');
+  const [channels, setChannels] = useState<Channel[]>(CHANNELS);
   const [activeChannel, setActiveChannel] = useState<Channel>(CHANNELS[0]);
   
+  // Favorites & Watch History
+  const [favorites, setFavorites] = useState<string[]>(() => {
+    try {
+      return JSON.parse(localStorage.getItem('bangletv_favorites') || '[]');
+    } catch {
+      return [];
+    }
+  });
+
+  const [recentlyWatched, setRecentlyWatched] = useState<string[]>(() => {
+    try {
+      return JSON.parse(localStorage.getItem('bangletv_recent') || '[]');
+    } catch {
+      return [];
+    }
+  });
+
   // Modals state
   const [isOwnershipOpen, setIsOwnershipOpen] = useState(false);
   const [isContactOpen, setIsContactOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
+  const [isChannelInfoOpen, setIsChannelInfoOpen] = useState(false);
+  const [selectedInfoChannel, setSelectedInfoChannel] = useState<Channel | null>(null);
 
   const handleSelectChannel = (channel: Channel) => {
     setActiveChannel(channel);
     setCurrentTab('player');
     window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // Track recently watched
+    setRecentlyWatched((prev) => {
+      const updated = [channel.id, ...prev.filter(id => id !== channel.id)].slice(0, 10);
+      try {
+        localStorage.setItem('bangletv_recent', JSON.stringify(updated));
+      } catch {}
+      return updated;
+    });
+  };
+
+  const handleToggleFavorite = (channelId: string) => {
+    setFavorites((prev) => {
+      const next = prev.includes(channelId)
+        ? prev.filter(id => id !== channelId)
+        : [...prev, channelId];
+      try {
+        localStorage.setItem('bangletv_favorites', JSON.stringify(next));
+      } catch {}
+      return next;
+    });
   };
 
   const handleOpenPolicies = (policyId: string = 'copyright') => {
@@ -58,6 +105,7 @@ export default function App() {
         onOpenSearch={() => setIsSearchOpen(true)}
         onOpenContact={() => setIsContactOpen(true)}
         onOpenOwnership={() => setIsOwnershipOpen(true)}
+        onOpenFeedback={() => setIsFeedbackOpen(true)}
       />
 
       {/* Main Content Area */}
@@ -68,28 +116,35 @@ export default function App() {
           <div>
             {/* Curated Hero Announcement Strip (Clean unboxed design) */}
             <div className="border-b border-white/8 bg-[#090d18]">
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
                 <div className="flex items-center gap-2.5 text-slate-300">
                   <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                  <span className="font-semibold text-white">Global Bengali Broadcast Network</span>
+                  <span className="font-semibold text-white">Full-Featured Open IPTV</span>
                   <span className="text-slate-500">·</span>
-                  <span className="text-slate-400">“Federate the network, not the content.”</span>
+                  <span className="text-slate-400">Live TV, VOD, 24/7 EPG, Regional Hubs & Viewer Proposals</span>
                 </div>
 
                 <div className="flex items-center gap-3">
                   <button
-                    onClick={() => setCurrentTab('documentary')}
-                    className="text-emerald-400 hover:text-emerald-300 font-medium transition-colors cursor-pointer flex items-center gap-1"
+                    onClick={() => setIsFeedbackOpen(true)}
+                    className="text-emerald-400 hover:text-emerald-300 font-medium transition-colors cursor-pointer flex items-center gap-1.5"
                   >
-                    <span>Bangladesh Documentary Archive (BBC & AJ)</span>
-                    <ArrowRight className="w-3 h-3" />
+                    <Sparkles className="w-3 h-3" />
+                    <span>Submit Programme Idea or Lead</span>
+                  </button>
+                  <span className="text-slate-600">|</span>
+                  <button
+                    onClick={() => setCurrentTab('vod')}
+                    className="text-slate-300 hover:text-white transition-colors cursor-pointer"
+                  >
+                    VOD & Catch-up
                   </button>
                   <span className="text-slate-600">|</span>
                   <button
                     onClick={() => setIsOwnershipOpen(true)}
                     className="text-slate-400 hover:text-white transition-colors cursor-pointer"
                   >
-                    Ownership Disclosure
+                    Ownership
                   </button>
                 </div>
               </div>
@@ -98,7 +153,7 @@ export default function App() {
             {/* Video Player Component */}
             <Player
               channel={activeChannel}
-              allChannels={CHANNELS}
+              allChannels={channels}
               onSelectChannel={handleSelectChannel}
               onOpenDocArchive={() => {
                 setCurrentTab('documentary');
@@ -109,11 +164,17 @@ export default function App() {
                 setCurrentTab('schedule');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
+              onOpenChannelInfo={(ch) => {
+                setSelectedInfoChannel(ch);
+                setIsChannelInfoOpen(true);
+              }}
+              onToggleFavorite={handleToggleFavorite}
+              isFavorite={favorites.includes(activeChannel.id)}
             />
 
             {/* Channel Discovery Grid */}
             <ChannelGrid
-              channels={CHANNELS}
+              channels={channels}
               activeChannel={activeChannel}
               onSelectChannel={handleSelectChannel}
             />
@@ -258,11 +319,25 @@ export default function App() {
           </div>
         )}
 
-        {/* TAB 1.5: Broadcast Programming Schedule (EPG Timeline) */}
+        {/* TAB 1.5: VOD & Catch-Up Shows */}
+        {currentTab === 'vod' && (
+          <VODSection
+            onOpenFeedbackModal={() => setIsFeedbackOpen(true)}
+          />
+        )}
+
+        {/* TAB 1.8: Broadcast Programming Schedule (EPG Timeline) */}
         {currentTab === 'schedule' && (
           <BroadcastSchedule
             onSelectChannel={handleSelectChannel}
             onOpenPolicies={handleOpenPolicies}
+          />
+        )}
+
+        {/* TAB 1.9: Regional & Dialect Directory */}
+        {currentTab === 'regions' && (
+          <RegionDirectory
+            onSelectChannel={handleSelectChannel}
           />
         )}
 
@@ -290,6 +365,15 @@ export default function App() {
           <OpenSourceArchitecture />
         )}
 
+        {/* TAB 4.5: Operational Admin Dashboard */}
+        {currentTab === 'admin' && (
+          <AdminDashboard
+            channels={channels as any}
+            onUpdateChannels={(updated) => setChannels(updated as any)}
+            onSelectChannel={handleSelectChannel}
+          />
+        )}
+
         {/* TAB 5: Institutional Governance & Policies */}
         {currentTab === 'policies' && (
           <PoliciesView
@@ -313,6 +397,18 @@ export default function App() {
         onOpenPolicies={handleOpenPolicies}
       />
 
+      <ViewerFeedbackModal
+        isOpen={isFeedbackOpen}
+        onClose={() => setIsFeedbackOpen(false)}
+      />
+
+      <ChannelInfoModal
+        channel={selectedInfoChannel as any}
+        isOpen={isChannelInfoOpen}
+        onClose={() => setIsChannelInfoOpen(false)}
+        onPlayChannel={(ch) => handleSelectChannel(ch as any)}
+      />
+
       <SearchModal
         isOpen={isSearchOpen}
         onClose={() => setIsSearchOpen(false)}
@@ -321,6 +417,10 @@ export default function App() {
         onSelectPolicy={handleOpenPolicies}
         onSelectSchedule={() => {
           setCurrentTab('schedule');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }}
+        onSelectVOD={() => {
+          setCurrentTab('vod');
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }}
       />
@@ -334,6 +434,7 @@ export default function App() {
         onOpenPolicies={handleOpenPolicies}
         onOpenOwnership={() => setIsOwnershipOpen(true)}
         onOpenContact={() => setIsContactOpen(true)}
+        onOpenFeedback={() => setIsFeedbackOpen(true)}
       />
 
     </div>

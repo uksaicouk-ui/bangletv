@@ -27,7 +27,7 @@ export const BroadcastSchedule: React.FC<BroadcastScheduleProps> = ({
   const [remindedIds, setRemindedIds] = useState<Record<string, boolean>>({});
 
   const timeSlots = ['All', 'Morning', 'Afternoon', 'Primetime', 'Late Night'];
-  const categories = ['All', 'Documentary', 'National', 'News', 'Diaspora', 'Community', 'Culture', 'Radio'];
+  const categories = ['All', 'News', 'Sports', 'National', 'Entertainment', 'Education', 'Culture', 'Documentary', 'Diaspora', 'Community', 'Radio'];
 
   // Filter programs
   const filteredPrograms = BROADCAST_SCHEDULE.filter((prog) => {

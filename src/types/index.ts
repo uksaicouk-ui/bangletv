@@ -1,8 +1,23 @@
+export interface StreamSource {
+  id: string;
+  label: string;
+  type: 'youtube' | 'hls' | 'audio' | 'embed';
+  url: string;
+  embedId?: string;
+  quality: '4K' | '1080p' | '720p' | '480p' | 'Auto' | 'Audio HD';
+  isVerified: boolean;
+  serverLocation: string;
+}
+
 export interface Channel {
   id: string;
+  number?: number;
   name: string;
   banglaName?: string;
-  category: 'National' | 'News' | 'Diaspora' | 'Community' | 'Documentary' | 'Culture' | 'Radio';
+  category: 'National' | 'News' | 'Sports' | 'Entertainment' | 'Education' | 'Documentary' | 'Culture' | 'Community' | 'Diaspora' | 'Radio' | 'Kids' | 'Music' | 'Religious';
+  country?: string;
+  region?: 'Bangladesh' | 'United Kingdom' | 'United States' | 'India' | 'Global' | 'Asia' | 'Europe' | 'Middle East' | 'North America';
+  language?: 'Bengali' | 'Sylheti' | 'English' | 'Multilingual' | 'Bangla' | 'Arabic' | 'Hindi' | 'Urdu' | 'French';
   communityNodeId: string;
   communityNodeName: string;
   logo: string;
@@ -10,9 +25,28 @@ export interface Channel {
   embedType: 'hls' | 'youtube' | 'audio' | 'embed';
   embedId?: string; // Specific video ID
   youtubeChannelId?: string; // 24/7 Live YouTube channel ID (e.g. UCN6sm8iHiPd0cnoUardDAnw)
+  sources?: StreamSource[];
+  activeSourceIndex?: number;
   isLive: boolean;
+  status?: 'Online' | 'Degraded' | 'Offline';
   currentShow: string;
   nextShow: string;
+  epgCurrent?: {
+    title: string;
+    banglaTitle?: string;
+    startTime: string;
+    endTime: string;
+    duration: string;
+    progressPercent: number;
+  };
+  epgNext?: {
+    title: string;
+    banglaTitle?: string;
+    startTime: string;
+    endTime: string;
+    duration: string;
+    progressPercent: number;
+  };
   viewersCount: number;
   resolution: '4K' | '1080p' | '720p' | 'Audio HD';
   broadcastLanguage: string;

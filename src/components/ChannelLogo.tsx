@@ -62,6 +62,113 @@ export const ChannelLogo: React.FC<ChannelLogoProps> = ({
         </div>
       );
 
+    case 'dbc-news':
+      // DBC News: Iconic Blue and White News Emblem
+      return (
+        <div className={`${sizeClasses[size]} rounded bg-[#0284c7] border border-blue-400 flex flex-col items-center justify-center font-extrabold text-white shadow-inner flex-shrink-0 ${className}`} title="DBC News HD">
+          <span className="leading-none text-[9px] font-bold">DBC</span>
+          <span className="text-[7px] text-sky-100 font-mono">NEWS</span>
+        </div>
+      );
+
+    case 't-sports-hd':
+      // T Sports: Premier Sports Network of Bangladesh (Green and Gold)
+      return (
+        <div className={`${sizeClasses[size]} rounded bg-[#047857] border border-emerald-400 flex flex-col items-center justify-center font-extrabold text-white shadow-inner flex-shrink-0 ${className}`} title="T Sports HD">
+          <span className="leading-none text-[10px] tracking-tight font-black">T</span>
+          <span className="text-[7px] text-amber-300 font-mono tracking-tighter">SPORTS</span>
+        </div>
+      );
+
+    case 'deepto-tv':
+      // Deepto TV: Vibrant Entertainment and Drama Mark
+      return (
+        <div className={`${sizeClasses[size]} rounded bg-[#7c3aed] border border-purple-400 flex items-center justify-center font-bold text-white shadow-inner flex-shrink-0 ${className}`} title="Deepto TV HD">
+          <span className="text-[10px] font-bold">দীপ্ত</span>
+        </div>
+      );
+
+    case 'sangshad-tv':
+      // Sangshad Bangladesh TV: Public Education & Parliament
+      return (
+        <div className={`${sizeClasses[size]} rounded bg-[#1e3a8a] border border-blue-500 flex flex-col items-center justify-center font-bold text-white shadow-inner flex-shrink-0 ${className}`} title="Sangshad Bangladesh Television">
+          <span className="leading-none text-[8px] text-amber-300 font-bold">সংসদ</span>
+          <span className="text-[7px] text-slate-200 font-mono">EDU</span>
+        </div>
+      );
+
+    case 'al-jazeera':
+    case 'al-jazeera-english':
+      // Al Jazeera Arabic & English Golden Teardrop Insignia
+      return (
+        <div className={`${sizeClasses[size]} rounded bg-[#935400] border border-amber-500/60 flex flex-col items-center justify-center font-black text-white shadow-inner flex-shrink-0 ${className}`} title="Al Jazeera English">
+          <span className="text-[10px] text-amber-200 font-serif leading-none font-bold">الجزيرة</span>
+          <span className="text-[6px] text-amber-100 font-mono tracking-tighter uppercase">AL JAZEERA</span>
+        </div>
+      );
+
+    case 'bbc-news':
+    case 'bbc-news-world':
+      // BBC News Iconic Red Triple Box
+      return (
+        <div className={`${sizeClasses[size]} rounded bg-[#B80000] border border-red-500/60 flex flex-col items-center justify-center font-bold text-white shadow-inner flex-shrink-0 ${className}`} title="BBC News World">
+          <div className="flex gap-0.5">
+            <span className="w-2.5 h-2.5 bg-black text-white flex items-center justify-center text-[7px] font-black">B</span>
+            <span className="w-2.5 h-2.5 bg-black text-white flex items-center justify-center text-[7px] font-black">B</span>
+            <span className="w-2.5 h-2.5 bg-black text-white flex items-center justify-center text-[7px] font-black">C</span>
+          </div>
+          <span className="text-[6px] text-white/90 font-mono tracking-tight uppercase mt-0.5">NEWS</span>
+        </div>
+      );
+
+    case 'dw-news':
+    case 'dw-english':
+      // Deutsche Welle Iconic Blue and White
+      return (
+        <div className={`${sizeClasses[size]} rounded bg-[#002D5A] border border-sky-400/60 flex flex-col items-center justify-center font-black text-white shadow-inner flex-shrink-0 ${className}`} title="DW News (Deutsche Welle)">
+          <span className="text-[11px] font-black text-white leading-none">DW</span>
+        </div>
+      );
+
+    case 'france-24':
+    case 'france-24-en':
+      // France 24 Iconic Blue Square
+      return (
+        <div className={`${sizeClasses[size]} rounded bg-[#0082C8] border border-sky-300 flex flex-col items-center justify-center font-black text-white shadow-inner flex-shrink-0 ${className}`} title="France 24 HD">
+          <span className="text-[8px] font-bold leading-none">FRANCE</span>
+          <span className="text-[10px] text-white font-black leading-none">24</span>
+        </div>
+      );
+
+    case 'nhk-world':
+    case 'nhk-world-japan':
+      // NHK World-Japan Red and White
+      return (
+        <div className={`${sizeClasses[size]} rounded bg-[#C41230] border border-red-400 flex flex-col items-center justify-center font-black text-white shadow-inner flex-shrink-0 ${className}`} title="NHK World-Japan">
+          <span className="text-[8px] font-bold leading-none">NHK</span>
+          <span className="text-[6px] text-amber-200 font-mono leading-none">WORLD</span>
+        </div>
+      );
+
+    case 'al-arabiya':
+    case 'al-arabiya-arabic':
+      // Al Arabiya Purple/Plum Mark
+      return (
+        <div className={`${sizeClasses[size]} rounded bg-[#5C0632] border border-purple-400 flex flex-col items-center justify-center font-bold text-white shadow-inner flex-shrink-0 ${className}`} title="Al Arabiya News">
+          <span className="text-[9px] font-bold">العربية</span>
+        </div>
+      );
+
+    case 'trt-world':
+    case 'trt-world-en':
+      // TRT World Turquoise & White
+      return (
+        <div className={`${sizeClasses[size]} rounded bg-[#005B60] border border-teal-400 flex flex-col items-center justify-center font-bold text-white shadow-inner flex-shrink-0 ${className}`} title="TRT World">
+          <span className="text-[9px] font-black text-teal-200">TRT</span>
+          <span className="text-[6px] text-white font-mono">WORLD</span>
+        </div>
+      );
+
     case 'bangladesh-doc-ref':
       // Bangladesh Documentary Reference: BBC & Al Jazeera Verified Dual Insignia
       return (

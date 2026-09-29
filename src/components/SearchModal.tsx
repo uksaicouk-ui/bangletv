@@ -3,6 +3,7 @@ import { Search, X, Tv, Film, FileText, ArrowRight, Calendar, Clock } from 'luci
 import { CHANNELS } from '../data/channelsData';
 import { DOCUMENTARY_ARCHIVE } from '../data/documentaryArchiveData';
 import { BROADCAST_SCHEDULE } from '../data/scheduleData';
+import { VOD_CATALOG } from '../data/vodData';
 import { Channel, DocumentaryReference } from '../types';
 
 interface SearchModalProps {
@@ -12,6 +13,7 @@ interface SearchModalProps {
   onSelectDocumentary: (doc: DocumentaryReference) => void;
   onSelectPolicy: (tab: string) => void;
   onSelectSchedule?: () => void;
+  onSelectVOD?: () => void;
 }
 
 export const SearchModal: React.FC<SearchModalProps> = ({
@@ -21,6 +23,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
   onSelectDocumentary,
   onSelectPolicy,
   onSelectSchedule,
+  onSelectVOD,
 }) => {
   const [query, setQuery] = useState('');
 
@@ -67,6 +70,17 @@ export const SearchModal: React.FC<SearchModalProps> = ({
           p.channelName.toLowerCase().includes(query.toLowerCase()) ||
           p.genre.toLowerCase().includes(query.toLowerCase()) ||
           p.synopsis.toLowerCase().includes(query.toLowerCase())
+      ).slice(0, 4)
+    : [];
+
+  const filteredVOD = query.trim()
+    ? VOD_CATALOG.filter(
+        (v) =>
+          v.title.toLowerCase().includes(query.toLowerCase()) ||
+          (v.banglaTitle && v.banglaTitle.toLowerCase().includes(query.toLowerCase())) ||
+          v.channelName.toLowerCase().includes(query.toLowerCase()) ||
+          v.category.toLowerCase().includes(query.toLowerCase()) ||
+          v.synopsis.toLowerCase().includes(query.toLowerCase())
       ).slice(0, 4)
     : [];
 
@@ -194,6 +208,38 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                           <span className="text-white font-medium truncate max-w-sm">{prog.title}</span>
                           <span className="text-slate-500 font-mono">
                             {prog.startTime} ({prog.channelName})
+                          </span>
+                        </div>
+                        <ArrowRight className="w-3.5 h-3.5 text-slate-500 group-hover:text-white" />
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* VOD & Catch-up Shows */}
+              {filteredVOD.length > 0 && (
+                <div>
+                  <span className="font-mono text-[10px] uppercase text-purple-400 tracking-wider block mb-2">
+                    VOD & Catch-up Shows ({filteredVOD.length})
+                  </span>
+                  <div className="space-y-1">
+                    {filteredVOD.map((v) => (
+                      <button
+                        key={v.id}
+                        onClick={() => {
+                          if (onSelectVOD) {
+                            onSelectVOD();
+                          }
+                          onClose();
+                        }}
+                        className="w-full text-left p-2 rounded hover:bg-slate-800/60 flex items-center justify-between transition-colors group cursor-pointer"
+                      >
+                        <div className="flex items-center gap-2">
+                          <Film className="w-4 h-4 text-slate-400 group-hover:text-purple-400" />
+                          <span className="text-white font-medium truncate max-w-sm">{v.title}</span>
+                          <span className="text-slate-500 font-mono">
+                            {v.duration} ({v.channelName})
                           </span>
                         </div>
                         <ArrowRight className="w-3.5 h-3.5 text-slate-500 group-hover:text-white" />

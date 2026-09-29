@@ -6,6 +6,7 @@ interface FooterProps {
   onOpenPolicies: (policyId: string) => void;
   onOpenOwnership: () => void;
   onOpenContact: () => void;
+  onOpenFeedback?: () => void;
 }
 
 export const Footer: React.FC<FooterProps> = ({
@@ -13,6 +14,7 @@ export const Footer: React.FC<FooterProps> = ({
   onOpenPolicies,
   onOpenOwnership,
   onOpenContact,
+  onOpenFeedback,
 }) => {
   return (
     <footer className="w-full bg-[#05080e] border-t border-white/8 text-slate-400 text-xs mt-16 transition-colors">
@@ -53,7 +55,15 @@ export const Footer: React.FC<FooterProps> = ({
                   onClick={() => onSelectTab('player')}
                   className="hover:text-emerald-400 transition-colors cursor-pointer"
                 >
-                  Live Player Suite
+                  Live TV Broadcast
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => onSelectTab('vod')}
+                  className="hover:text-emerald-400 transition-colors cursor-pointer"
+                >
+                  VOD & Catch-up Shows
                 </button>
               </li>
               <li>
@@ -66,10 +76,10 @@ export const Footer: React.FC<FooterProps> = ({
               </li>
               <li>
                 <button
-                  onClick={() => onSelectTab('documentary')}
+                  onClick={() => onSelectTab('regions')}
                   className="hover:text-emerald-400 transition-colors cursor-pointer"
                 >
-                  Bangladesh Archive (BBC & AJ)
+                  Territory & Language Directory
                 </button>
               </li>
               <li>
@@ -80,14 +90,16 @@ export const Footer: React.FC<FooterProps> = ({
                   Global Federation Nodes
                 </button>
               </li>
-              <li>
-                <button
-                  onClick={() => onSelectTab('architecture')}
-                  className="hover:text-emerald-400 transition-colors cursor-pointer"
-                >
-                  9-Tier Open Ecosystem
-                </button>
-              </li>
+              {onOpenFeedback && (
+                <li>
+                  <button
+                    onClick={onOpenFeedback}
+                    className="text-emerald-400 hover:text-emerald-300 transition-colors cursor-pointer font-medium"
+                  >
+                    Submit Show Idea or Feed →
+                  </button>
+                </li>
+              )}
             </ul>
           </div>
 
