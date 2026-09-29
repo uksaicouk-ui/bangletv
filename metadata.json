@@ -1,0 +1,8 @@
+{
+  "name": "BangleTV.com — Open IPTV Platform for Bengali Communities Worldwide",
+  "description": "Federated open IPTV network preserving community ownership, featuring live Bengali broadcasting, Bangladesh documentary archive with BBC & Al Jazeera coverage, and open-source node architecture.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
