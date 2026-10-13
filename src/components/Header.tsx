@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Radio, Search, ShieldCheck, Globe, Menu, X, ExternalLink, Sparkles, MessageSquare, Server } from 'lucide-react';
 import { Channel } from '../types';
-import { BengalTVWatermark } from './BengalTVWatermark';
+import { DainikJahanLogo } from './DainikJahanLogo';
 
 interface HeaderProps {
   currentTab: string;
@@ -28,6 +28,7 @@ export const Header: React.FC<HeaderProps> = ({
     { id: 'player', label: 'Live TV' },
     { id: 'vod', label: 'VOD & Catch-up' },
     { id: 'schedule', label: 'Schedule' },
+    { id: 'journalist', label: 'সাংবাদিক প্যানেল' },
     { id: 'regions', label: 'Regions' },
     { id: 'federation', label: 'Federation Nodes' },
     { id: 'admin', label: 'Admin Ops' },
@@ -45,20 +46,25 @@ export const Header: React.FC<HeaderProps> = ({
         {/* Top Bar Contract: 3 zones */}
         <div className="flex items-center justify-between h-18">
           
-          {/* Zone 1: Wordmark with User's Bengal TV Logo */}
+          {/* Zone 1: Wordmark with User's Dainik Jahan Logo */}
           <div className="flex items-center gap-3">
             <button 
               onClick={() => handleNavClick('player')}
-              className="text-left group cursor-pointer focus:outline-none flex items-center gap-2.5"
-              aria-label="BangleTV Home"
+              className="text-left group cursor-pointer focus:outline-none flex items-center gap-3"
+              aria-label="Dainik Jahan Home"
             >
-              <BengalTVWatermark size="sm" showText={false} />
-              <div className="flex items-baseline gap-2">
-                <span className="font-brand text-2xl font-bold tracking-tight text-white group-hover:text-emerald-400 transition-colors">
-                  BangleTV<span className="text-emerald-500">.com</span>
-                </span>
-                <span className="hidden sm:inline-block text-[11px] text-amber-400 font-serif font-bold tracking-wider">
-                  বেঙ্গল টিভি
+              <DainikJahanLogo size="sm" />
+              <div className="flex flex-col text-left">
+                <div className="flex items-baseline gap-2">
+                  <span className="font-brand text-2xl font-bold tracking-tight text-white group-hover:text-red-400 transition-colors">
+                    দৈনিক জাহান
+                  </span>
+                  <span className="hidden sm:inline-block px-1.5 py-0.5 rounded text-[10px] font-mono uppercase bg-red-600/20 text-red-400 border border-red-500/30">
+                    অনলাইন আইপিটিভি
+                  </span>
+                </div>
+                <span className="hidden sm:block text-[10px] text-slate-400 font-mono tracking-wider -mt-0.5">
+                  DainikJahan.com · 24/7 Live Broadcast
                 </span>
               </div>
             </button>
@@ -97,6 +103,20 @@ export const Header: React.FC<HeaderProps> = ({
               aria-label="Search channels and archives"
             >
               <Search className="w-4 h-4" />
+            </button>
+
+            {/* Journalist Desk Button */}
+            <button
+              onClick={() => onSelectTab('journalist')}
+              className={`hidden sm:flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg border transition-all cursor-pointer whitespace-nowrap ${
+                currentTab === 'journalist'
+                  ? 'bg-red-600 text-white border-red-500 shadow-md shadow-red-600/30'
+                  : 'bg-red-950/40 text-red-300 hover:text-white hover:bg-red-900/50 border-red-500/30'
+              }`}
+              title="সাংবাদিক প্যানেল ও লাইভ চ্যানেল কন্ট্রোল"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-red-400 animate-pulse" />
+              <span>প্রেস ডেস্ক</span>
             </button>
 
             {/* Ownership transparency badge button */}

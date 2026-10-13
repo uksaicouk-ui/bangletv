@@ -1,0 +1,38 @@
+{
+  "entities": {
+    "breaking_news": {
+      "title": "Breaking News Flash",
+      "description": "Real-time live news tickers broadcasted by field journalists",
+      "properties": {
+        "text": { "type": "string", "description": "The breaking news text" },
+        "reporter": { "type": "string", "description": "Reporter name and bureau" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["text", "reporter"]
+    },
+    "journalist_dispatches": {
+      "title": "Journalist Field Dispatches",
+      "description": "Field reports, investigations and videos filed by journalists",
+      "properties": {
+        "id": { "type": "string" },
+        "journalistName": { "type": "string" },
+        "banglaTitle": { "type": "string" },
+        "category": { "type": "string" },
+        "videoUrl": { "type": "string" },
+        "location": { "type": "string" },
+        "synopsis": { "type": "string" }
+      },
+      "required": ["id", "banglaTitle", "videoUrl"]
+    },
+    "viewer_submissions": {
+      "title": "Viewer Proposals",
+      "description": "Show ideas, leads, and channel feedback",
+      "properties": {
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "message": { "type": "string" }
+      },
+      "required": ["message"]
+    }
+  }
+}

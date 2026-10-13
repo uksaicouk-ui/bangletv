@@ -103,3 +103,38 @@ export type PolicyTab =
   | 'opensource'
   | 'contact'
   | 'ownership';
+
+export interface Journalist {
+  id: string;
+  name: string;
+  banglaName: string;
+  pressCardNo: string;
+  role: string;
+  email: string;
+  avatar?: string;
+  bureauLocation: string;
+  assignedChannelId: string;
+  assignedChannelName: string;
+  verified: boolean;
+  phone: string;
+  joinedDate: string;
+}
+
+export interface JournalistDispatch {
+  id: string;
+  journalistId: string;
+  journalistName: string;
+  channelId: string;
+  channelName: string;
+  title: string;
+  banglaTitle: string;
+  category: 'Investigative' | 'Breaking News' | 'Field Report' | 'Talk Show' | 'Special Bulletin' | 'Documentary';
+  videoUrl: string;
+  duration: string;
+  location: string;
+  date: string;
+  status: 'Published' | 'Under Review' | 'Draft';
+  synopsis: string;
+  views: number;
+}
+

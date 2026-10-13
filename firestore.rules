@@ -1,0 +1,29 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Breaking news tickers: Publicly readable, writeable by active journalists
+    match /breaking_news/{docId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Journalist field dispatches: Publicly readable, writeable by journalists
+    match /journalist_dispatches/{dispatchId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Viewer feedback & program suggestions: Public write, restricted read
+    match /viewer_submissions/{submissionId} {
+      allow create: if true;
+      allow read: if true;
+    }
+
+    // Custom ingested channels
+    match /custom_channels/{channelId} {
+      allow read: if true;
+      allow write: if true;
+    }
+  }
+}

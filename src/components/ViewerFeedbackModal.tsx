@@ -3,6 +3,7 @@ import {
   X, Send, Sparkles, Tv, MessageSquare, ShieldCheck, 
   Lightbulb, FileText, CheckCircle2, Copy, Download, Mail, ExternalLink, Globe 
 } from 'lucide-react';
+import { saveViewerSubmissionToCloud } from '../services/firebaseDb';
 
 interface ViewerFeedbackModalProps {
   isOpen: boolean;
@@ -62,8 +63,9 @@ export const ViewerFeedbackModal: React.FC<ViewerFeedbackModalProps> = ({
       submittedAt: new Date().toISOString()
     };
 
-    // Store in localStorage
+    // Store in Cloud Firestore & localStorage
     try {
+      saveViewerSubmissionToCloud(newProposal);
       const existing = JSON.parse(localStorage.getItem('bangletv_viewer_dispatches') || '[]');
       existing.unshift(newProposal);
       localStorage.setItem('bangletv_viewer_dispatches', JSON.stringify(existing));

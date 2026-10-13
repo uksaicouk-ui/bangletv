@@ -1,5 +1,6 @@
 import React from 'react';
 import { ShieldCheck, Globe, Heart } from 'lucide-react';
+import { DainikJahanLogo } from './DainikJahanLogo';
 
 interface FooterProps {
   onSelectTab: (tab: string) => void;
@@ -25,22 +26,30 @@ export const Footer: React.FC<FooterProps> = ({
           
           {/* Brand & Creed */}
           <div className="lg:col-span-2 space-y-3">
-            <div className="flex items-baseline gap-2">
-              <span className="font-brand text-xl font-bold tracking-tight text-white">
-                BangleTV<span className="text-emerald-500">.com</span>
-              </span>
-              <span className="text-[11px] text-slate-500 font-mono uppercase">
-                Open IPTV Network
-              </span>
+            <div className="flex items-center gap-3">
+              <DainikJahanLogo size="sm" />
+              <div>
+                <div className="flex items-baseline gap-2">
+                  <span className="font-brand text-xl font-bold tracking-tight text-white">
+                    দৈনিক জাহান
+                  </span>
+                  <span className="text-[10px] text-red-400 font-mono uppercase bg-red-950/40 px-1.5 py-0.5 rounded border border-red-500/30">
+                    অনলাইন আইপিটিভি
+                  </span>
+                </div>
+                <span className="text-[10px] text-slate-500 font-mono block">
+                  DainikJahan.com · Federated News & Media Network
+                </span>
+              </div>
             </div>
             
             <p className="text-xs text-slate-300 leading-relaxed max-w-sm">
-              World-class open IPTV platform connecting Bengali communities globally. Empowering community autonomy, historical inquiry, and decentralized culture.
+              জাতীয়, আন্তর্জাতিক ও আঞ্চলিক খবরের বিশ্বস্ত মাধ্যম দৈনিক জাহান। পূর্ণাঙ্গ অনলাইন আইপিটিভি, সরাসরি সম্প্রচার ও সার্বক্ষণিক গণমাধ্যম প্ল্যাটফর্ম।
             </p>
 
-            <div className="p-3 bg-slate-900/60 border-l-2 border-emerald-500 rounded-r text-[11px] text-slate-300">
-              <span className="font-semibold text-emerald-400 block mb-0.5">Foundational Creed:</span>
-              “Federate the network, not the content.” Every community retains sovereign ownership of its channels and audience.
+            <div className="p-3 bg-slate-900/60 border-l-2 border-red-500 rounded-r text-[11px] text-slate-300">
+              <span className="font-semibold text-red-400 block mb-0.5">মূলনীতি:</span>
+              “ফেডারেট দ্য নেটওয়ার্ক, নট দ্য কনটেন্ট।” বস্তুনিষ্ঠ সাংবাদিকতা ও সার্বভৌম গণমাধ্যম কাঠামো।
             </div>
           </div>
 
@@ -80,6 +89,15 @@ export const Footer: React.FC<FooterProps> = ({
                   className="hover:text-emerald-400 transition-colors cursor-pointer"
                 >
                   Territory & Language Directory
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => onSelectTab('journalist')}
+                  className="text-red-400 hover:text-red-300 font-medium transition-colors cursor-pointer flex items-center gap-1"
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
+                  <span>সাংবাদিক প্যানেল (Press Desk)</span>
                 </button>
               </li>
               <li>
@@ -236,7 +254,7 @@ export const Footer: React.FC<FooterProps> = ({
         {/* Bottom Bar */}
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-400">
           <div>
-            © {new Date().getFullYear()} BangleTV.com & BengalTV.com. All community content rights reserved to respective creators.
+            © {new Date().getFullYear()} দৈনিক জাহান (DainikJahan.com). সর্বস্বত্ব সংরক্ষিত।
           </div>
           <div className="flex items-center gap-4 text-slate-400">
             <span>Decentralized Open Protocol</span>

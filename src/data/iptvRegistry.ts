@@ -75,37 +75,28 @@ export const IPTV_CHANNELS: IPTVChannel[] = [
     sources: [
       {
         id: 'jamuna-yt-primary',
-        label: 'Server 1 (Dhaka Primary YouTube HD)',
-        type: 'youtube',
-        url: 'https://www.youtube-nocookie.com/embed/live_stream?channel=UCN6sm8iHiPd0cnoUardDAnw',
-        quality: '1080p',
-        isVerified: true,
-        serverLocation: 'Dhaka, Bangladesh'
-      },
-      {
-        id: 'jamuna-yt-backup',
-        label: 'Server 2 (Jamuna 24 Ghanta Live Relay)',
+        label: 'Server 1 (যমুনা ২৪ ঘণ্টা সরাসরি সম্প্রচার HD)',
         type: 'youtube',
         url: 'https://www.youtube-nocookie.com/embed/2aB9nFj8z6s',
         quality: '1080p',
         isVerified: true,
-        serverLocation: 'Singapore CDN'
+        serverLocation: 'Dhaka Central Hub'
       },
       {
-        id: 'jamuna-embed-fallback',
-        label: 'Server 3 (Jamuna Official Web Relay)',
+        id: 'jamuna-yt-backup',
+        label: 'Server 2 (Jamuna Satellite Relay)',
         type: 'youtube',
-        url: 'https://www.youtube-nocookie.com/embed/live_stream?channel=UCvsrgV0G9gW6_3U5_7t7-9A',
-        quality: '720p',
+        url: 'https://www.youtube-nocookie.com/embed/a6v75dGv2z8',
+        quality: '1080p',
         isVerified: true,
-        serverLocation: 'Frankfurt Node'
+        serverLocation: 'Singapore CDN'
       }
     ],
     activeSourceIndex: 0,
     isLive: true,
     status: 'Online',
-    currentShow: '24 Ghanta Live: Rapid Analysis & Real-Time Field Reports',
-    nextShow: 'Janatar Shonglap: Citizen Dialogue with Policy Reformers',
+    currentShow: '২৪ ঘণ্টা লাইভ: মাঠপর্যায়ের বস্তুনিষ্ঠ সংবাদ ও বিশ্লেষণ',
+    nextShow: 'জনতার সংলাপ: সংস্কার ও জনআকাঙ্ক্ষা',
     epgCurrent: {
       title: '24 Ghanta Live: Rapid Analysis & Field Reports',
       banglaTitle: '২৪ ঘণ্টা লাইভ: মাঠপর্যায়ের বস্তুনিষ্ঠ সংবাদ',
@@ -145,18 +136,18 @@ export const IPTV_CHANNELS: IPTVChannel[] = [
     sources: [
       {
         id: 'somoy-yt-primary',
-        label: 'Server 1 (Somoy 24/7 News Feed)',
+        label: 'Server 1 (সময় সংবাদ সার্বক্ষণিক বুলেটিন HD)',
         type: 'youtube',
-        url: 'https://www.youtube-nocookie.com/embed/live_stream?channel=UCxHoBXkY88Tb8z1Ssj6CWsQ',
+        url: 'https://www.youtube-nocookie.com/embed/u4C01G3t3E8',
         quality: '1080p',
         isVerified: true,
-        serverLocation: 'Dhaka, Bangladesh'
+        serverLocation: 'Dhaka Central Hub'
       },
       {
         id: 'somoy-yt-backup',
-        label: 'Server 2 (Somoy Bulletin Special)',
+        label: 'Server 2 (Somoy Global Fiber)',
         type: 'youtube',
-        url: 'https://www.youtube-nocookie.com/embed/u4C01G3t3E8',
+        url: 'https://www.youtube-nocookie.com/embed/2aB9nFj8z6s',
         quality: '1080p',
         isVerified: true,
         serverLocation: 'London Node'
@@ -165,8 +156,8 @@ export const IPTV_CHANNELS: IPTVChannel[] = [
     activeSourceIndex: 0,
     isLive: true,
     status: 'Online',
-    currentShow: 'Shironam Shobcheye Age: Hourly Comprehensive Bulletin',
-    nextShow: 'Desh Rupantor: Economic Recovery & Governance Ledger',
+    currentShow: 'শিরোনাম সবচেয়ে আগে: প্রতি ঘণ্টার প্রধান সংবাদ',
+    nextShow: 'দেশ রূপান্তর: অর্থনৈতিক চালচিত্র ও বাণিজ্য খতিয়ান',
     epgCurrent: {
       title: 'Hourly News Bulletin',
       banglaTitle: 'সময় বুলেটিন: দেশ ও আন্তর্জাতিক খবর',
@@ -206,18 +197,18 @@ export const IPTV_CHANNELS: IPTVChannel[] = [
     sources: [
       {
         id: 'ekattor-yt-primary',
-        label: 'Server 1 (Ekattor HD Broadcast)',
+        label: 'Server 1 (একাত্তর জার্নাল ও সরাসরি সংবাদ HD)',
         type: 'youtube',
-        url: 'https://www.youtube-nocookie.com/embed/live_stream?channel=UCtqvtAVmad5zywaziN6CbfA',
+        url: 'https://www.youtube-nocookie.com/embed/Z6S7n9j0h_Y',
         quality: '1080p',
         isVerified: true,
-        serverLocation: 'Dhaka, Bangladesh'
+        serverLocation: 'Dhaka Central Hub'
       },
       {
         id: 'ekattor-yt-backup',
-        label: 'Server 2 (Ekattor Journal Relay)',
+        label: 'Server 2 (Ekattor Debate Relay)',
         type: 'youtube',
-        url: 'https://www.youtube-nocookie.com/embed/Z6S7n9j0h_Y',
+        url: 'https://www.youtube-nocookie.com/embed/xKx3_2A3R9Y',
         quality: '1080p',
         isVerified: true,
         serverLocation: 'Singapore CDN'
@@ -226,8 +217,8 @@ export const IPTV_CHANNELS: IPTVChannel[] = [
     activeSourceIndex: 0,
     isLive: true,
     status: 'Online',
-    currentShow: 'Ekattor Journal: In-Depth Investigative Review',
-    nextShow: 'Goltebil: Policy Debate on Constitution & Rights',
+    currentShow: 'একাত্তর জার্নাল: বিশেষ অনুসন্ধানী পর্যালোচনা',
+    nextShow: 'গোলটেবিল: শাসনতন্ত্র ও নাগরিক অধিকার বিতর্ক',
     epgCurrent: {
       title: 'Ekattor Journal: Special Report',
       banglaTitle: 'একাত্তর জার্নাল: বিশেষ প্রতিবেদন',
@@ -267,18 +258,18 @@ export const IPTV_CHANNELS: IPTVChannel[] = [
     sources: [
       {
         id: 'dbc-primary',
-        label: 'Server 1 (DBC News Official Live)',
+        label: 'Server 1 (ডিবিসি সংবাদ সরাসরি HD)',
         type: 'youtube',
-        url: 'https://www.youtube-nocookie.com/embed/live_stream?channel=UC5pChk_evEhlVaEEV5-C4yg',
+        url: 'https://www.youtube-nocookie.com/embed/xKx3_2A3R9Y',
         quality: '1080p',
         isVerified: true,
-        serverLocation: 'Dhaka, Bangladesh'
+        serverLocation: 'Dhaka Central Hub'
       },
       {
         id: 'dbc-backup',
         label: 'Server 2 (DBC Shongbad Relay)',
         type: 'youtube',
-        url: 'https://www.youtube-nocookie.com/embed/xKx3_2A3R9Y',
+        url: 'https://www.youtube-nocookie.com/embed/2aB9nFj8z6s',
         quality: '720p',
         isVerified: true,
         serverLocation: 'US East Relay'
@@ -287,8 +278,8 @@ export const IPTV_CHANNELS: IPTVChannel[] = [
     activeSourceIndex: 0,
     isLive: true,
     status: 'Online',
-    currentShow: 'DBC Shongbad: Continuous National Coverage',
-    nextShow: 'Rajkahon: Prime Time Political Exchange',
+    currentShow: 'ডিবিসি সংবাদ: সার্বক্ষণিক জাতীয় ও বিশ্ব খবর',
+    nextShow: 'রাজকাহন: রাজনীতি ও সংস্কার পর্যালোচনা',
     epgCurrent: {
       title: 'DBC National Bulletin',
       banglaTitle: 'ডিবিসি সংবাদ: সার্বক্ষণিক খবর',
@@ -331,18 +322,18 @@ export const IPTV_CHANNELS: IPTVChannel[] = [
     sources: [
       {
         id: 'btv-yt-official',
-        label: 'Server 1 (BTV World Official Broadcast Feed)',
+        label: 'Server 1 (বিটিভি ওয়ার্ল্ড রাষ্ট্রীয় সম্প্রচার HD)',
         type: 'youtube',
-        url: 'https://www.youtube-nocookie.com/embed/live_stream?channel=UCJ9AoOeOA9PJGABEibs_HvA',
+        url: 'https://www.youtube-nocookie.com/embed/3k_iE9A_YyQ',
         quality: '1080p',
         isVerified: true,
         serverLocation: 'Rampura, Dhaka'
       },
       {
         id: 'btv-backup-relay',
-        label: 'Server 2 (BTV State Heritage Archive Relay)',
+        label: 'Server 2 (BTV Heritage Archive Relay)',
         type: 'youtube',
-        url: 'https://www.youtube-nocookie.com/embed/3k_iE9A_YyQ',
+        url: 'https://www.youtube-nocookie.com/embed/Z6S7n9j0h_Y',
         quality: '1080p',
         isVerified: true,
         serverLocation: 'Singapore CDN'
@@ -351,8 +342,8 @@ export const IPTV_CHANNELS: IPTVChannel[] = [
     activeSourceIndex: 0,
     isLive: true,
     status: 'Online',
-    currentShow: 'Sangbad Bichitra: National Affairs & Diplomatic Ledger',
-    nextShow: 'Shurer Dhara: Classical Bengali Music Tradition',
+    currentShow: 'সংবাদ বিচিত্রা: জাতীয় পরিক্রমা ও কূটনীতি',
+    nextShow: 'সুরের ধারা: চিরায়ত শাস্ত্রীয় সঙ্গীত ঐতিহ্য',
     epgCurrent: {
       title: 'Sangbad Bichitra: National Digest',
       banglaTitle: 'সংবাদ বিচিত্রা: জাতীয় পরিক্রমা',
@@ -392,12 +383,12 @@ export const IPTV_CHANNELS: IPTVChannel[] = [
     sources: [
       {
         id: 'tsports-primary',
-        label: 'Server 1 (T Sports Match Arena HD)',
+        label: 'Server 1 (টি স্পোর্টস অ্যারেনা HD)',
         type: 'youtube',
         url: 'https://www.youtube-nocookie.com/embed/xKx3_2A3R9Y',
         quality: '1080p',
         isVerified: true,
-        serverLocation: 'Dhaka, Bangladesh'
+        serverLocation: 'Dhaka Sports Complex'
       },
       {
         id: 'tsports-backup',
@@ -412,8 +403,8 @@ export const IPTV_CHANNELS: IPTVChannel[] = [
     activeSourceIndex: 0,
     isLive: true,
     status: 'Online',
-    currentShow: 'Live Match Arena: Cricket & Premier League Analysis',
-    nextShow: 'Sports Extra: Global Football Recap & Athlete Interviews',
+    currentShow: 'ম্যাচ অ্যারেনা: ক্রিকেট ও ফুটবল বিশেষ পর্যালোচনা',
+    nextShow: 'স্পোর্টস এক্সট্রা: আন্তর্জাতিক ফুটবল ও সেরা মুহূর্ত',
     epgCurrent: {
       title: 'Cricket Tactical Review',
       banglaTitle: 'ক্রিকেট ম্যাচ পর্যালোচনা ও সেরা মুহূর্ত',
@@ -453,18 +444,18 @@ export const IPTV_CHANNELS: IPTVChannel[] = [
     sources: [
       {
         id: 'channel-i-primary',
-        label: 'Server 1 (Channel i Global HD)',
+        label: 'Server 1 (চ্যানেল আই গ্লোবাল HD)',
         type: 'youtube',
-        url: 'https://www.youtube-nocookie.com/embed/live_stream?channel=UC8NcXMG3A3f2aFQyGTpSNww',
+        url: 'https://www.youtube-nocookie.com/embed/jR8S8f-p-gA',
         quality: '1080p',
         isVerified: true,
         serverLocation: 'Tejgaon, Dhaka'
       },
       {
         id: 'channel-i-backup',
-        label: 'Server 2 (Tritiyo Matra & Agriculture Relay)',
+        label: 'Server 2 (Tritiyo Matra Relay)',
         type: 'youtube',
-        url: 'https://www.youtube-nocookie.com/embed/jR8S8f-p-gA',
+        url: 'https://www.youtube-nocookie.com/embed/Z6S7n9j0h_Y',
         quality: '1080p',
         isVerified: true,
         serverLocation: 'Singapore CDN'
@@ -473,8 +464,8 @@ export const IPTV_CHANNELS: IPTVChannel[] = [
     activeSourceIndex: 0,
     isLive: true,
     status: 'Online',
-    currentShow: 'Hridoye Mati O Manush: Agriculture and Agrarian Future',
-    nextShow: 'Tritiyo Matra: Midnight Political Roundtable',
+    currentShow: 'হৃদয়ে মাটি ও মানুষ: আধুনিক কৃষি প্রযুক্তি ও খামার',
+    nextShow: 'তৃতীয় মাত্রা: মধ্যরাতের রাজনৈতিক সংলাপ',
     epgCurrent: {
       title: 'Hridoye Mati O Manush',
       banglaTitle: 'হৃদয়ে মাটি ও মানুষ: আধুনিক কৃষি প্রযুক্তি',
@@ -514,19 +505,19 @@ export const IPTV_CHANNELS: IPTVChannel[] = [
     sources: [
       {
         id: 'deepto-primary',
-        label: 'Server 1 (Deepto TV Entertainment Live)',
+        label: 'Server 1 (দীপ্ত টিভি বিনোদন লাইভ HD)',
         type: 'youtube',
         url: 'https://www.youtube-nocookie.com/embed/Z6S7n9j0h_Y',
         quality: '1080p',
         isVerified: true,
-        serverLocation: 'Dhaka, Bangladesh'
+        serverLocation: 'Dhaka Central Hub'
       }
     ],
     activeSourceIndex: 0,
     isLive: true,
     status: 'Online',
-    currentShow: 'Prime Time Bengali Mega Serial & Family Drama',
-    nextShow: 'Shondhar Golpo: Contemporary Fiction Showcase',
+    currentShow: 'জনপ্রিয় মেগাধারাবাহিক নাটক ও পারিবারিক গল্প',
+    nextShow: 'সন্ধ্যার গল্প: সমকালীন পারিবারিক টেলিফিল্ম',
     epgCurrent: {
       title: 'Bengali Mega Drama Serial',
       banglaTitle: 'জনপ্রিয় মেগাধারাবাহিক নাটক',
@@ -566,19 +557,19 @@ export const IPTV_CHANNELS: IPTVChannel[] = [
     sources: [
       {
         id: 'sangshad-primary',
-        label: 'Server 1 (Sangshad Educational Broadcast)',
+        label: 'Server 1 (সংসদ টেলিভিশন শিক্ষা ও নাগরিক সংলাপ HD)',
         type: 'youtube',
         url: 'https://www.youtube-nocookie.com/embed/3k_iE9A_YyQ',
         quality: '1080p',
         isVerified: true,
-        serverLocation: 'Dhaka, Bangladesh'
+        serverLocation: 'Dhaka Central Hub'
       }
     ],
     activeSourceIndex: 0,
     isLive: true,
     status: 'Online',
-    currentShow: 'Ghore Boshe Shikhi: Distance Learning & STEM Curriculum',
-    nextShow: 'Parliamentary Archive & Constitutional Reform Debates',
+    currentShow: 'ঘরে বসে শিখি: দূরশিক্ষণ ও বিজ্ঞান পাঠ',
+    nextShow: 'সাংবিধানিক সংস্কার ও সংসদীয় ইতিহাস',
     epgCurrent: {
       title: 'STEM Science & Mathematics Lesson',
       banglaTitle: 'ঘরে বসে শিখি: গণিত ও বিজ্ঞান শিক্ষা',
@@ -621,18 +612,18 @@ export const IPTV_CHANNELS: IPTVChannel[] = [
     sources: [
       {
         id: 'aj-yt-live',
-        label: 'Server 1 (Al Jazeera Official 24/7 Feed)',
+        label: 'Server 1 (Al Jazeera 24/7 Global Feed HD)',
         type: 'youtube',
-        url: 'https://www.youtube-nocookie.com/embed/live_stream?channel=UCNye-wNBqNL5ZzHSJj3l8Bg',
+        url: 'https://www.youtube-nocookie.com/embed/a6v75dGv2z8',
         quality: '1080p',
         isVerified: true,
         serverLocation: 'Doha, Qatar'
       },
       {
         id: 'aj-backup-doc',
-        label: 'Server 2 (I-Unit Investigative Special: Bangladesh)',
+        label: 'Server 2 (I-Unit Investigative Relay)',
         type: 'youtube',
-        url: 'https://www.youtube-nocookie.com/embed/a6v75dGv2z8',
+        url: 'https://www.youtube-nocookie.com/embed/2aB9nFj8z6s',
         quality: '1080p',
         isVerified: true,
         serverLocation: 'London Node'
@@ -641,7 +632,7 @@ export const IPTV_CHANNELS: IPTVChannel[] = [
     activeSourceIndex: 0,
     isLive: true,
     status: 'Online',
-    currentShow: 'Newshour: Global Conflict, Diplomacy & Economy',
+    currentShow: 'Al Jazeera Newshour: Global Diplomacy & Middle East Conflict',
     nextShow: '101 East: Asia Investigative Magazine',
     epgCurrent: {
       title: 'Al Jazeera Newshour Global',
@@ -682,18 +673,18 @@ export const IPTV_CHANNELS: IPTVChannel[] = [
     sources: [
       {
         id: 'bbc-yt-primary',
-        label: 'Server 1 (BBC News Live YouTube Hub)',
+        label: 'Server 1 (BBC News World Special Relay HD)',
         type: 'youtube',
-        url: 'https://www.youtube-nocookie.com/embed/live_stream?channel=UC16niRr50-MSBwiO3YDb3RA',
+        url: 'https://www.youtube-nocookie.com/embed/Z6S7n9j0h_Y',
         quality: '1080p',
         isVerified: true,
         serverLocation: 'London, UK'
       },
       {
         id: 'bbc-backup-special',
-        label: 'Server 2 (BBC Bangladesh Special Investigation)',
+        label: 'Server 2 (BBC International Broadcast)',
         type: 'youtube',
-        url: 'https://www.youtube-nocookie.com/embed/Z6S7n9j0h_Y',
+        url: 'https://www.youtube-nocookie.com/embed/u4C01G3t3E8',
         quality: '1080p',
         isVerified: true,
         serverLocation: 'London Node'
@@ -743,18 +734,18 @@ export const IPTV_CHANNELS: IPTVChannel[] = [
     sources: [
       {
         id: 'dw-yt-live',
-        label: 'Server 1 (DW English 24/7 Live Stream)',
+        label: 'Server 1 (DW English European News HD)',
         type: 'youtube',
-        url: 'https://www.youtube-nocookie.com/embed/live_stream?channel=UCknLrEdhRCp1aegoMqRaCZg',
+        url: 'https://www.youtube-nocookie.com/embed/jR8S8f-p-gA',
         quality: '1080p',
         isVerified: true,
         serverLocation: 'Berlin, Germany'
       },
       {
         id: 'dw-backup',
-        label: 'Server 2 (DW Documentary & Climate Feed)',
+        label: 'Server 2 (DW Documentary & Climate)',
         type: 'youtube',
-        url: 'https://www.youtube-nocookie.com/embed/jR8S8f-p-gA',
+        url: 'https://www.youtube-nocookie.com/embed/oX5wA1R8e0o',
         quality: '1080p',
         isVerified: true,
         serverLocation: 'Frankfurt CDN'
@@ -763,7 +754,7 @@ export const IPTV_CHANNELS: IPTVChannel[] = [
     activeSourceIndex: 0,
     isLive: true,
     status: 'Online',
-    currentShow: 'DW News Live: European Affairs & Global Perspectives',
+    currentShow: 'DW News Europe: Climate, Tech and Politics',
     nextShow: 'Conflict Zone: Tough Interviews with Key Players',
     epgCurrent: {
       title: 'DW News Europe & World',
@@ -804,9 +795,9 @@ export const IPTV_CHANNELS: IPTVChannel[] = [
     sources: [
       {
         id: 'france24-yt',
-        label: 'Server 1 (France 24 English 24/7 Live)',
+        label: 'Server 1 (France 24 International Live HD)',
         type: 'youtube',
-        url: 'https://www.youtube-nocookie.com/embed/live_stream?channel=UC4TzN3iVz-c0d1lA1uQyU6w',
+        url: 'https://www.youtube-nocookie.com/embed/oX5wA1R8e0o',
         quality: '1080p',
         isVerified: true,
         serverLocation: 'Paris, France'
@@ -815,7 +806,7 @@ export const IPTV_CHANNELS: IPTVChannel[] = [
         id: 'france24-backup',
         label: 'Server 2 (France 24 Special Investigation)',
         type: 'youtube',
-        url: 'https://www.youtube-nocookie.com/embed/oX5wA1R8e0o',
+        url: 'https://www.youtube-nocookie.com/embed/a6v75dGv2z8',
         quality: '1080p',
         isVerified: true,
         serverLocation: 'London Node'
@@ -865,9 +856,9 @@ export const IPTV_CHANNELS: IPTVChannel[] = [
     sources: [
       {
         id: 'nhk-yt',
-        label: 'Server 1 (NHK World-Japan Live Feed)',
+        label: 'Server 1 (NHK World-Japan Asian Newsline HD)',
         type: 'youtube',
-        url: 'https://www.youtube-nocookie.com/embed/live_stream?channel=UC4g11_076UfC9m0N06iX_wQ',
+        url: 'https://www.youtube-nocookie.com/embed/xKx3_2A3R9Y',
         quality: '1080p',
         isVerified: true,
         serverLocation: 'Tokyo, Japan'
@@ -876,7 +867,7 @@ export const IPTV_CHANNELS: IPTVChannel[] = [
         id: 'nhk-backup',
         label: 'Server 2 (NHK Asia Technology Relay)',
         type: 'youtube',
-        url: 'https://www.youtube-nocookie.com/embed/xKx3_2A3R9Y',
+        url: 'https://www.youtube-nocookie.com/embed/jR8S8f-p-gA',
         quality: '1080p',
         isVerified: true,
         serverLocation: 'Tokyo Node'
@@ -929,9 +920,9 @@ export const IPTV_CHANNELS: IPTVChannel[] = [
     sources: [
       {
         id: 'arabiya-primary',
-        label: 'Server 1 (Al Arabiya Arabic Live)',
+        label: 'Server 1 (আল আরাবিয়া মধ্যপ্রাচ্য লাইভ HD)',
         type: 'youtube',
-        url: 'https://www.youtube-nocookie.com/embed/live_stream?channel=UCahpxixMCwoANAftn6IxkTg',
+        url: 'https://www.youtube-nocookie.com/embed/u4C01G3t3E8',
         quality: '1080p',
         isVerified: true,
         serverLocation: 'Dubai, UAE'
@@ -940,7 +931,7 @@ export const IPTV_CHANNELS: IPTVChannel[] = [
         id: 'arabiya-backup',
         label: 'Server 2 (Middle East Economic Forum Relay)',
         type: 'youtube',
-        url: 'https://www.youtube-nocookie.com/embed/u4C01G3t3E8',
+        url: 'https://www.youtube-nocookie.com/embed/Z6S7n9j0h_Y',
         quality: '720p',
         isVerified: true,
         serverLocation: 'Riyadh Node'
@@ -990,9 +981,9 @@ export const IPTV_CHANNELS: IPTVChannel[] = [
     sources: [
       {
         id: 'trt-primary',
-        label: 'Server 1 (TRT World 24/7 Official Live)',
+        label: 'Server 1 (TRT World 24/7 Official Live HD)',
         type: 'youtube',
-        url: 'https://www.youtube-nocookie.com/embed/live_stream?channel=UCvzbZWCy8nwvmOK8x1-c7Yw',
+        url: 'https://www.youtube-nocookie.com/embed/Z6S7n9j0h_Y',
         quality: '1080p',
         isVerified: true,
         serverLocation: 'Istanbul, Turkey'
@@ -1001,7 +992,7 @@ export const IPTV_CHANNELS: IPTVChannel[] = [
         id: 'trt-backup',
         label: 'Server 2 (TRT Showcase Relay)',
         type: 'youtube',
-        url: 'https://www.youtube-nocookie.com/embed/Z6S7n9j0h_Y',
+        url: 'https://www.youtube-nocookie.com/embed/2aB9nFj8z6s',
         quality: '1080p',
         isVerified: true,
         serverLocation: 'Frankfurt CDN'
@@ -1054,7 +1045,7 @@ export const IPTV_CHANNELS: IPTVChannel[] = [
     sources: [
       {
         id: 'london-primary',
-        label: 'Server 1 (Brick Lane Fiber Relay)',
+        label: 'Server 1 (Brick Lane Fiber Relay HD)',
         type: 'youtube',
         url: 'https://www.youtube-nocookie.com/embed/u4C01G3t3E8',
         quality: '1080p',
@@ -1106,7 +1097,7 @@ export const IPTV_CHANNELS: IPTVChannel[] = [
     sources: [
       {
         id: 'ny-primary',
-        label: 'Server 1 (Jackson Heights Gigabit Relay)',
+        label: 'Server 1 (Jackson Heights Gigabit Relay HD)',
         type: 'youtube',
         url: 'https://www.youtube-nocookie.com/embed/Z6S7n9j0h_Y',
         quality: '1080p',

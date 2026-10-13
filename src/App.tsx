@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Header } from './components/Header';
 import { Player } from './components/Player';
 import { ChannelGrid } from './components/ChannelGrid';
@@ -20,10 +20,13 @@ import { ViewerFeedbackModal } from './components/ViewerFeedbackModal';
 import { SearchModal } from './components/SearchModal';
 import { AdminDashboard } from './components/AdminDashboard';
 import { ChannelInfoModal } from './components/ChannelInfoModal';
+import { JournalistPortal } from './components/JournalistPortal';
+import { BreakingNewsBanner } from './components/BreakingNewsBanner';
 import { Footer } from './components/Footer';
 import { CHANNELS } from './data/channelsData';
-import { Channel, DocumentaryReference } from './types';
-import { Radio, ShieldCheck, Film, Globe, Sparkles, ArrowRight, Play, Server, Layers, Cpu, Network, Bookmark, History } from 'lucide-react';
+import { Channel, DocumentaryReference, JournalistDispatch, StreamSource } from './types';
+import { broadcastBreakingNewsToCloud, subscribeBreakingNews } from './services/firebaseDb';
+import { Radio, ShieldCheck, Film, Globe, Sparkles, ArrowRight, Play, Server, Layers, Cpu, Network, Bookmark, History, Send } from 'lucide-react';
 
 export default function App() {
   const [currentTab, setCurrentTab] = useState<string>('player');
@@ -55,6 +58,116 @@ export default function App() {
   const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
   const [isChannelInfoOpen, setIsChannelInfoOpen] = useState(false);
   const [selectedInfoChannel, setSelectedInfoChannel] = useState<Channel | null>(null);
+
+  // Real-time Breaking News Ticker State (Broadcasted by Journalists)
+  const [activeBreakingNews, setActiveBreakingNews] = useState<string | null>(() => {
+    try {
+      return localStorage.getItem('dj_breaking_news') || 'ব্রেকিং: দুর্নীতি দমন কমিশনের বিশেষ দলের অভিযান মতিঝিল ও গুলশানের তিনটি আর্থিক প্রতিষ্ঠানে...';
+    } catch {
+      return 'ব্রেকিং: দুর্নীতি দমন কমিশনের বিশেষ দলের অভিযান মতিঝিল ও গুলশানের তিনটি আর্থিক প্রতিষ্ঠানে...';
+    }
+  });
+
+  const [breakingReporter, setBreakingReporter] = useState<string | null>(() => {
+    try {
+      return localStorage.getItem('dj_breaking_reporter') || 'তরিকুল ইসলাম রনি (বিশেষ অনুসন্ধান ডেস্ক)';
+    } catch {
+      return 'তরিকুল ইসলাম রনি (বিশেষ অনুসন্ধান ডেস্ক)';
+    }
+  });
+
+  // Subscribe to real-time Breaking News from Cloud Firestore
+  useEffect(() => {
+    const unsubscribe = subscribeBreakingNews((cloudNews, cloudReporter) => {
+      if (cloudNews) {
+        setActiveBreakingNews(cloudNews);
+        if (cloudReporter) setBreakingReporter(cloudReporter);
+      }
+    });
+    return () => unsubscribe();
+  }, []);
+
+  // Handler for Journalists to trigger Breaking News
+  const handleBroadcastBreakingNews = (text: string, reporterName: string) => {
+    setActiveBreakingNews(text);
+    setBreakingReporter(reporterName);
+    broadcastBreakingNewsToCloud(text, reporterName);
+    try {
+      localStorage.setItem('dj_breaking_news', text);
+      localStorage.setItem('dj_breaking_reporter', reporterName);
+    } catch {}
+  };
+
+  // Handler for Journalists to update their Channel Stream & Program
+  const handleUpdateChannelStream = (channelId: string, newStreamUrl: string, currentShow?: string) => {
+    setChannels((prev) =>
+      prev.map((ch) => {
+        if (ch.id === channelId) {
+          const updatedSources: StreamSource[] | undefined = ch.sources && ch.sources.length > 0
+            ? [
+                {
+                  id: `src-field-${Date.now()}`,
+                  label: 'Server (সাংবাদিক ফিল্ড ফিড / OB Van)',
+                  type: (newStreamUrl.includes('youtube') ? 'youtube' : 'hls') as 'youtube' | 'hls',
+                  url: newStreamUrl,
+                  quality: '1080p' as const,
+                  isVerified: true,
+                  serverLocation: 'ফিল্ড ওবি ইউনিট (Field Live Kit)'
+                },
+                ...ch.sources
+              ]
+            : ch.sources;
+
+          return {
+            ...ch,
+            streamUrl: newStreamUrl,
+            currentShow: currentShow || ch.currentShow,
+            sources: updatedSources,
+            activeSourceIndex: 0
+          };
+        }
+        return ch;
+      })
+    );
+
+    // If currently watching this channel, update activeChannel immediately
+    if (activeChannel.id === channelId) {
+      setActiveChannel((prev) => ({
+        ...prev,
+        streamUrl: newStreamUrl,
+        currentShow: currentShow || prev.currentShow
+      }));
+    }
+  };
+
+  // Handler to play a journalist dispatch directly
+  const handlePlayDispatch = (dispatch: JournalistDispatch) => {
+    const dispatchChannel: Channel = {
+      id: `dispatch-${dispatch.id}`,
+      name: `${dispatch.banglaTitle}`,
+      banglaName: `${dispatch.journalistName} — সরেজমিন প্রতিবেদন`,
+      category: 'Documentary',
+      country: 'Bangladesh',
+      region: 'Bangladesh',
+      language: 'Bangla',
+      communityNodeId: 'node-dhaka-central',
+      communityNodeName: 'সাংবাদিক ডেস্ক (Press Dispatch)',
+      logo: 'jamuna-tv-hd',
+      streamUrl: dispatch.videoUrl,
+      embedType: (dispatch.videoUrl.includes('youtube') ? 'youtube' : 'hls') as 'youtube' | 'hls',
+      isLive: false,
+      currentShow: dispatch.banglaTitle,
+      nextShow: 'দৈনিক জাহান বিশেষ অনুসন্ধান',
+      viewersCount: dispatch.views,
+      resolution: '1080p',
+      broadcastLanguage: 'বাংলা',
+      description: dispatch.synopsis,
+      editorialNote: `প্রতিবেদক: ${dispatch.journalistName} (${dispatch.location})`,
+      tags: ['Journalist Report', 'Field Dispatch', dispatch.category]
+    };
+
+    handleSelectChannel(dispatchChannel);
+  };
 
   const handleSelectChannel = (channel: Channel) => {
     setActiveChannel(channel);
@@ -108,6 +221,17 @@ export default function App() {
         onOpenFeedback={() => setIsFeedbackOpen(true)}
       />
 
+      {/* Real-Time Live Breaking News Flash Ticker (Broadcasted by Journalists) */}
+      <BreakingNewsBanner
+        news={activeBreakingNews}
+        reporter={breakingReporter}
+        onDismiss={() => setActiveBreakingNews(null)}
+        onOpenJournalistPortal={() => {
+          setCurrentTab('journalist');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }}
+      />
+
       {/* Main Content Area */}
       <main className="flex-1">
         
@@ -118,19 +242,30 @@ export default function App() {
             <div className="border-b border-white/8 bg-[#090d18]">
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
                 <div className="flex items-center gap-2.5 text-slate-300">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                  <span className="font-semibold text-white">Full-Featured Open IPTV</span>
+                  <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
+                  <span className="font-semibold text-white">দৈনিক জাহান অনলাইন</span>
                   <span className="text-slate-500">·</span>
-                  <span className="text-slate-400">Live TV, VOD, 24/7 EPG, Regional Hubs & Viewer Proposals</span>
+                  <span className="text-slate-400">লাইভ টিভি সম্প্রচার, সংবাদ, ভিওডি ও পূর্ণাঙ্গ আইপিটিভি প্ল্যাটফর্ম</span>
                 </div>
 
                 <div className="flex items-center gap-3">
+                  <button
+                    onClick={() => {
+                      setCurrentTab('journalist');
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }}
+                    className="text-red-400 hover:text-red-300 font-medium transition-colors cursor-pointer flex items-center gap-1.5"
+                  >
+                    <Send className="w-3 h-3" />
+                    <span>সাংবাদিক প্যানেল ও প্রেস ডেস্ক</span>
+                  </button>
+                  <span className="text-slate-600">|</span>
                   <button
                     onClick={() => setIsFeedbackOpen(true)}
                     className="text-emerald-400 hover:text-emerald-300 font-medium transition-colors cursor-pointer flex items-center gap-1.5"
                   >
                     <Sparkles className="w-3 h-3" />
-                    <span>Submit Programme Idea or Lead</span>
+                    <span>প্রস্তাব পাঠান</span>
                   </button>
                   <span className="text-slate-600">|</span>
                   <button
@@ -363,6 +498,17 @@ export default function App() {
         {/* TAB 4: 9-Tier Open-Source Architecture */}
         {currentTab === 'architecture' && (
           <OpenSourceArchitecture />
+        )}
+
+        {/* TAB 4.2: Dedicated Journalist & Press Desk Portal */}
+        {currentTab === 'journalist' && (
+          <JournalistPortal
+            channels={channels}
+            onUpdateChannelStream={handleUpdateChannelStream}
+            onBroadcastBreakingNews={handleBroadcastBreakingNews}
+            onPlayDispatch={handlePlayDispatch}
+            activeBreakingNews={activeBreakingNews}
+          />
         )}
 
         {/* TAB 4.5: Operational Admin Dashboard */}

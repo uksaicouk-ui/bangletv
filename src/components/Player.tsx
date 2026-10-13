@@ -8,7 +8,7 @@ import {
 } from 'lucide-react';
 import { Channel, StreamSource } from '../types';
 import { ChannelLogo } from './ChannelLogo';
-import { BengalTVWatermark } from './BengalTVWatermark';
+import { DainikJahanLogo } from './DainikJahanLogo';
 
 interface PlayerProps {
   channel: Channel;
@@ -297,10 +297,10 @@ export const Player: React.FC<PlayerProps> = ({
               />
             )}
 
-            {/* 2. BENGAL TV BROADCAST BUG WATERMARK (USER'S IMAGE REPRODUCTION) */}
+            {/* 2. DAINIK JAHAN BROADCAST BUG WATERMARK (USER'S OFFICIAL LOGO) */}
             {/* Positioned in top-right corner with zero white background box */}
-            <div className="absolute top-4 right-4 z-20 pointer-events-none opacity-85 hover:opacity-100 transition-opacity">
-              <BengalTVWatermark size="sm" showText={true} />
+            <div className="absolute top-4 right-4 z-20 pointer-events-none opacity-90 hover:opacity-100 transition-opacity">
+              <DainikJahanLogo size="sm" />
             </div>
 
             {/* 3. MULTI-SOURCE FAILOVER / ERROR RECOVERY OVERLAY */}
